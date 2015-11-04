@@ -1,0 +1,18 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    -# %link{:href => "../../favicon.ico", :rel => "icon"}/
+    %title Resilient Integration Testing - Continuous Lifecycle 2015
+    %script( script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
+    = stylesheet_link_tag "app"
+    = javascript_include_tag "vendor"
+    = javascript_include_tag "app"
+
+
+  %body
+    .reveal
+      .slides
+        = yield

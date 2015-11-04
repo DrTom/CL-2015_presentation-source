@@ -1,0 +1,383 @@
+%section#intro
+
+  %section#intro_title
+
+
+    %h2 Fast and Resilient Integration Testing
+
+    %h3 HackITZ November 2015
+
+    %h3 Continuous Lifecycle 2015
+
+
+    %p Thomas Schank
+    %p Max F. Albrecht
+
+  %section#intro_about
+
+    %h1 About Us
+
+    %ul
+      %li Thomas: Software-Architect, Developer, CI-Infrastructure
+      %li Max: Frontend Software-Engineer, Meta-Data Concepts
+
+
+    %h3
+      %a{href: 'https://www.zhdk.ch/'}
+        Zurich University of the Arts
+
+    %h2
+      %a{href: 'https://github.com/made://github.com/madek'}
+        Madek
+      %br
+      %a{href: 'http://medienarchiv.zhdk.ch/'}
+        Medienarchiv der Künste
+
+//#############################################################################
+//### Problem #################################################################
+//#############################################################################
+
+%section#probem
+  %section#problem_problem
+    :markdown
+      # The Problem
+
+      ## Madek Project 2012
+
+      many new features, many new tests
+
+      * testing time 1 1/2 - 2 hours, increasing
+      * more and more failing tests (false negatives)
+      * 1/8 builds pass
+
+  %section#problem_improve-tests
+    :markdown
+      # Try to Improve Tests
+
+      * very time and resources consuming
+      * new features and new tests made efforts futile
+
+  %section#problem_manual-retries
+    :markdown
+      # Manual Retrying
+
+      automated tests, local retries
+
+      automatic → semi automatic testing
+
+  %section#problem_reasoning
+    :markdown
+      # Reasoning
+
+      ## One Test
+
+      $$p_f$$ probability of failure
+
+      $$p_s = 1 - p_f$$ probability of success
+
+      ## $$n$$ Tests
+
+      $$ P_s = p_s^n $$ probability of success for all tests
+
+
+
+  %section#problem_explanation
+    :markdown
+      # Explanation
+
+      $$k$$ retry compensation
+
+      $$ P'_s = (1 - p_f^k)^n $$
+
+    %img{src: 'compensated.svg'}
+
+    %p{style: "font-size: 50%; margin: 0px;"}
+      $$p_f = 0.01;  k= 1 (blue), 2 (red), 3 (yellow) $$
+
+
+
+  %section#problem_conclusion
+    :markdown
+
+      # Conclusion
+
+      false negatives happen in complex scenarios
+
+      your testing strategy needs to compensate for them
+
+
+
+
+//#############################################################################
+//### Implementation ##########################################################
+//#############################################################################
+
+
+%section#implementation
+  %section#implementation-intro
+
+    %h1 Implementation
+
+  %section#implementation_jenkins
+    :markdown
+      # Jenkins
+
+      * fall 2012
+      * build creates other builds via the Jenkins API
+      * last build aggregates
+
+      → it worked
+
+  %section#implementation_jenkins-problems
+    :markdown
+      # Problems
+
+      * plugin architecture
+      * "REST-like style API" → nothing like REST
+      * hunt for documentation
+
+      * frequent SCM pushes interfere
+      * considerable maintenance
+
+      → Jenkins just isn't made for this
+
+  %section#implementation_homegrown-solution
+    :markdown
+      # Homegrown Solution
+
+      private project started in spring  2013
+
+      * inherent support for retries and parallelization
+      * expert system
+      * simple as possible
+      * Git and git only, all the way down
+
+      ready to use in fall 2013
+
+
+
+//#############################################################################
+//### Concepts and Examples in Context ########################################
+//#############################################################################
+
+%section#context
+
+  %section#contex
+    %h1 Concepts and Examples in Context
+
+
+
+  //#############################################################################
+
+  %section#jobs
+    :markdown
+      # Jobs
+
+        * build
+        * perform static code checks
+        * run tests
+        * deploy
+
+
+    .image
+      %a{href: 'ob-dependencies.svg'}
+        %img{src: 'job-dependencies.svg', style: "height: 300px; width: 300px;"}
+
+    %p jobs can depend on each other
+
+
+    %aside.notes
+      :markdown
+        * _Continuous Integration Server_  vs. stupid script runner
+
+  %section#madek-jobs
+    %h1  Jobs and Dependencies for the Madek Project
+    .image
+      %a{href: 'madek_job-dependencies.svg'}
+        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
+
+  %section#madek-jobs-video
+    %a{href: 'jobs.mp4'}
+      %video
+        %source{'data-src': 'jobs.mp4', type: 'video/mp4',
+          style: "width: 100%; height: 100%;"}
+
+
+  //#############################################################################
+
+  %section#tasks-trials_1
+    %h1 Tasks & Trials 1
+
+    .image
+      %a{href: 'job-tasks-script.svg'}
+        %img{src: 'job-tasks-script.svg', style: "width: 500px;"}
+
+    :markdown
+
+      jobs: container and state aggregate of tasks
+
+
+  %section#tasks-trials_2
+    %h1 Tasks & Trials 2
+
+    .image
+      %a{href: 'trial-retry.svg'}
+        %img{src: 'trial-retry.svg', style: "width: 500px;"}
+
+    :markdown
+
+      task: blueprint, container and state aggregate of trials
+
+      ## parallelization and resilience
+
+
+  //#############################################################################
+
+  %section#scripts_intro
+    :markdown
+      # Scripts
+
+      actual unit of execution
+
+      traditional CI: one "build" ⇔ one script
+
+      more modern: one main script + before and after hooks
+
+      * easy vs simple
+      * doesn't cut it for integration testing
+
+  %section#scripts_cider
+    :markdown
+      # Scripts with Dependencies
+
+    .image
+      %a{href: 'scripts-dependencies.png'}
+        %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
+
+  %section#scripts_in-action
+
+    %a{href: 'scripts.mp4'}
+      %video
+        %source{'data-src': 'scripts.mp4', type: 'video/mp4',
+          style: "width: 100%; height: 100%;"}
+
+
+  %section#scripts_gantt-chart
+    :markdown
+      # Scripts Gantt-Chart
+
+    .image
+      %a{href: 'scripts-gantt-chart.png'}
+        %img{src: 'scripts-gantt-chart.png', style: "width: 800px;"}
+
+
+
+  %section#scripts_fail
+    :markdown
+      # Scripts - Fail and Clean-up
+
+    .image
+      %a{href: 'scripts-dependencies-fail.png'}
+        %img{src: 'scripts-dependencies-fail.png', style: "width: 800px;"}
+
+
+  %section#context-conclusion
+    :markdown
+      # Conclusion
+
+      real continuous integration: job dependencies
+
+      resilient integration testing: tasks, trials and retries
+
+      parallelization: independent tasks
+
+      integration testing & servcies: scripts with dependencies
+
+
+
+//#############################################################################
+//### practices ###############################################################
+//#############################################################################
+
+
+%section#practices
+
+  %section#practices_intro
+    :markdown
+      # Practices, Opinions, Ramblings, and More
+
+  %section#practices_unit
+    %h1 Unit Testing
+
+    .image
+      %a{href: 'unit-tests.gif'}
+        %img{src: 'unit-tests.gif', style: "height: 300px; width: 300px;"}
+
+
+
+
+
+  %section#practices_source
+    :markdown
+      # The Source is the Truth
+
+
+  %section#pracices_git
+    :markdown
+      # Git and git only
+
+      Know the Source
+
+      * reproducibility
+      * binary search for code-breaks
+
+  %section#practices_shadowing-failures
+    :markdown
+      # Reproducible Randomization
+
+      Automatic retries can shadow real problems.
+
+      * Statistics
+      * Seed pseudo random generator with by the state of your code.
+
+  %section#practices_dont-optimize-test
+    :markdown
+      # Don't "Optimize" Tests
+      (for speed anyways)
+
+    %aside.notes
+      :markdown
+        * last level:
+            * production mode
+            * reverse proxy as in production
+        * counter example: Rails transaction in SQL db for clean, because it is faster
+
+
+//#############################################################################
+//### conclusion ##############################################################
+//#############################################################################
+
+%section#end
+
+  %section#final-conclusion
+    :markdown
+
+      # Conclusion
+
+      Consider to build your own test runner.
+
+      or
+
+      try Cider-CI,
+
+      * [cider-ci.info](http://cider-ci.info/)
+      * [Cider-CI @ Github](https://github.com/cider-ci)
+
+      Open Source, installs with two commands via Ansible
+      TODO link
+
+
+
+
+
+
