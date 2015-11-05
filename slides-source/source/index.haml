@@ -5,13 +5,12 @@
 
     %h2 Fast and Resilient Integration Testing
 
-    %h3 HackITZ November 2015
-
     %h3 Continuous Lifecycle 2015
-
 
     %p Thomas Schank
     %p Max F. Albrecht
+
+    %h4 (Version 0.2.0-draft)
 
   %section#intro_about
 
@@ -80,6 +79,9 @@
       $$ P_s = p_s^n $$ probability of success for all tests
 
 
+      # TODO: add example numbers
+
+
 
   %section#problem_explanation
     :markdown
@@ -94,6 +96,8 @@
     %p{style: "font-size: 50%; margin: 0px;"}
       $$p_f = 0.01;  k= 1 (blue), 2 (red), 3 (yellow) $$
 
+    :markdown
+      # TODO: add example numbers
 
 
   %section#problem_conclusion
@@ -128,16 +132,19 @@
 
       → it worked
 
+      * solves false negative problem (largely)
+      * testing time: 15 - 25 minutes
+
+      # TODO: add screenshot
+
   %section#implementation_jenkins-problems
     :markdown
-      # Problems
+      # Iusses
 
-      * plugin architecture
-      * "REST-like style API" → nothing like REST
+      * "REST-like style API" → not much like REST
       * hunt for documentation
 
-      * frequent SCM pushes interfere
-      * considerable maintenance
+      * too frequent SCM pushes interfere
 
       → Jenkins just isn't made for this
 
@@ -152,8 +159,18 @@
       * simple as possible
       * Git and git only, all the way down
 
-      ready to use in fall 2013
+      ready to use in fall 2013, never looked back
 
+
+  %section#implementation_cider-ci
+    :markdown
+      # [Cider-CI](http://cider-ci.info) Today
+
+      * false negatives solved
+      * testing time Madek v2:  2 Hours → 3 ‥ 5 Minutes
+      * support complex scenarios:
+        * testing microservice architectures
+        * perform deployment
 
 
 //#############################################################################
@@ -166,6 +183,7 @@
     %h1 Concepts and Examples in Context
 
 
+    (top down)
 
   //#############################################################################
 
@@ -190,17 +208,24 @@
       :markdown
         * _Continuous Integration Server_  vs. stupid script runner
 
-  %section#madek-jobs
-    %h1  Jobs and Dependencies for the Madek Project
-    .image
-      %a{href: 'madek_job-dependencies.svg'}
-        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
 
-  %section#madek-jobs-video
-    %a{href: 'jobs.mp4'}
-      %video
-        %source{'data-src': 'jobs.mp4', type: 'video/mp4',
-          style: "width: 100%; height: 100%;"}
+
+    %section#practices_source
+      :markdown
+        # Practice: The Source is the Truth
+
+
+    %section#concepts_scm
+      :markdown
+        # CI and Source Code Management Systems
+
+        job is bound to _tree-id_ (hash of the state of your project)
+
+        _tree-id_ is bound to commits
+
+        * reproducibility
+        * binary search for code-breaks
+
 
 
   //#############################################################################
@@ -231,6 +256,30 @@
       ## parallelization and resilience
 
 
+  %section#practices_shadowing-failures
+    :markdown
+      # Practice: Reproducible Randomization
+
+      Automatic retries could shadow real problems.
+
+      * Use statistics.
+
+      * Best practice: seed pseudo random generator.
+
+
+  %section#practices_dont-optimize-test
+    :markdown
+      # Practice: Don't "Optimize" Tests
+      (for speed anyways)
+
+    %aside.notes
+      :markdown
+        * last level:
+            * production mode
+            * reverse proxy as in production
+        * counter example: Rails transaction in SQL db for clean, because it is faster
+
+
   //#############################################################################
 
   %section#scripts_intro
@@ -249,27 +298,9 @@
   %section#scripts_cider
     :markdown
       # Scripts with Dependencies
-
     .image
       %a{href: 'scripts-dependencies.png'}
         %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
-
-  %section#scripts_in-action
-
-    %a{href: 'scripts.mp4'}
-      %video
-        %source{'data-src': 'scripts.mp4', type: 'video/mp4',
-          style: "width: 100%; height: 100%;"}
-
-
-  %section#scripts_gantt-chart
-    :markdown
-      # Scripts Gantt-Chart
-
-    .image
-      %a{href: 'scripts-gantt-chart.png'}
-        %img{src: 'scripts-gantt-chart.png', style: "width: 800px;"}
-
 
 
   %section#scripts_fail
@@ -296,61 +327,49 @@
 
 
 //#############################################################################
-//### practices ###############################################################
+//### demos ###################################################################
 //#############################################################################
 
+%section#demos
 
-%section#practices
+  %section#demos_demos
 
-  %section#practices_intro
+    %h1 Demos
+
+  %section#demos_scripts_int-tests
     :markdown
-      # Practices, Opinions, Ramblings, and More
-
-  %section#practices_unit
-    %h1 Unit Testing
-
+      # Scripts with Dependencies
     .image
-      %a{href: 'unit-tests.gif'}
-        %img{src: 'unit-tests.gif', style: "height: 300px; width: 300px;"}
+      %a{href: 'scripts-dependencies.png'}
+        %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
 
+  %section#demos_scripts_in-action
 
+    %a{href: 'scripts.mp4'}
+      %video
+        %source{'data-src': 'scripts.mp4', type: 'video/mp4',
+          style: "width: 100%; height: 100%;"}
 
-
-
-  %section#practices_source
+  %section#scripts_gantt-chart
     :markdown
-      # The Source is the Truth
+      # Scripts Gantt-Chart
+    .image
+      %a{href: 'scripts-gantt-chart.png'}
+        %img{src: 'scripts-gantt-chart.png', style: "width: 800px;"}
 
 
-  %section#pracices_git
-    :markdown
-      # Git and git only
+  %section#demos_madek-jobs
+    %h1  Jobs and Dependencies for the Madek Project
+    .image
+      %a{href: 'madek_job-dependencies.svg'}
+        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
 
-      Know the Source
+  %section#demos_madek-jobs-video
+    %a{href: 'jobs.mp4'}
+      %video
+        %source{'data-src': 'jobs.mp4', type: 'video/mp4',
+          style: "width: 100%; height: 100%;"}
 
-      * reproducibility
-      * binary search for code-breaks
-
-  %section#practices_shadowing-failures
-    :markdown
-      # Reproducible Randomization
-
-      Automatic retries can shadow real problems.
-
-      * Statistics
-      * Seed pseudo random generator with by the state of your code.
-
-  %section#practices_dont-optimize-test
-    :markdown
-      # Don't "Optimize" Tests
-      (for speed anyways)
-
-    %aside.notes
-      :markdown
-        * last level:
-            * production mode
-            * reverse proxy as in production
-        * counter example: Rails transaction in SQL db for clean, because it is faster
 
 
 //#############################################################################
@@ -368,16 +387,11 @@
 
       or
 
-      try Cider-CI,
+      try Cider-CI, open source, installs with one command:
 
-      * [cider-ci.info](http://cider-ci.info/)
-      * [Cider-CI @ Github](https://github.com/cider-ci)
+      [Cider-CI Quick Start Guide](http://docs.cider-ci.info/introduction/quick-start/)
 
-      Open Source, installs with two commands via Ansible
-      TODO link
-
-
-
+      `http://docs.cider-ci.info/introduction/quick-start/`
 
 
 
