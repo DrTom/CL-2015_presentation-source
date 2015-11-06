@@ -10,7 +10,7 @@
     %p Thomas Schank
     %p Max F. Albrecht
 
-    %h4 (Version 0.2.0-draft)
+    %h4 (Version 0.3.0-draft)
 
   %section#intro_about
 
@@ -177,17 +177,16 @@
 //### Concepts and Examples in Context ########################################
 //#############################################################################
 
-%section#context
+%section#concepts
 
-  %section#contex
+  %section#concepts
     %h1 Concepts and Examples in Context
-
 
     (top down)
 
   //#############################################################################
 
-  %section#jobs
+  %section#concepts_jobs
     :markdown
       # Jobs
 
@@ -198,7 +197,7 @@
 
 
     .image
-      %a{href: 'ob-dependencies.svg'}
+      %a{href: 'job-dependencies.svg'}
         %img{src: 'job-dependencies.svg', style: "height: 300px; width: 300px;"}
 
     %p jobs can depend on each other
@@ -210,27 +209,27 @@
 
 
 
-    %section#practices_source
-      :markdown
-        # Practice: The Source is the Truth
+  %section#practices_source
+    :markdown
+      # Practice: The Source is the Truth
 
 
-    %section#concepts_scm
-      :markdown
-        # CI and Source Code Management Systems
+  %section#concepts_scm
+    :markdown
+      # CI and Source Code Management Systems
 
-        job is bound to _tree-id_ (hash of the state of your project)
+      job is bound to _tree-id_ (hash of the state of your project)
 
-        _tree-id_ is bound to commits
+      _tree-id_ is bound to commits
 
-        * reproducibility
-        * binary search for code-breaks
+      * reproducibility
+      * binary search for code-breaks
 
 
 
   //#############################################################################
 
-  %section#tasks-trials_1
+  %section#concepts_tasks-trials_1
     %h1 Tasks & Trials 1
 
     .image
@@ -242,7 +241,7 @@
       jobs: container and state aggregate of tasks
 
 
-  %section#tasks-trials_2
+  %section#concepts_tasks-trials_2
     %h1 Tasks & Trials 2
 
     .image
@@ -282,7 +281,7 @@
 
   //#############################################################################
 
-  %section#scripts_intro
+  %section#concepts_scripts-intro
     :markdown
       # Scripts
 
@@ -295,7 +294,7 @@
       * easy vs simple
       * doesn't cut it for integration testing
 
-  %section#scripts_cider
+  %section#concepts_scripts-cider
     :markdown
       # Scripts with Dependencies
     .image
@@ -303,7 +302,7 @@
         %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
 
 
-  %section#scripts_fail
+  %section#concepts_scripts-fail
     :markdown
       # Scripts - Fail and Clean-up
 
@@ -312,7 +311,7 @@
         %img{src: 'scripts-dependencies-fail.png', style: "width: 800px;"}
 
 
-  %section#context-conclusion
+  %section#concepts_conclusion
     :markdown
       # Conclusion
 

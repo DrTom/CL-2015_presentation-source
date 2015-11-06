@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 set -eux
-rm -rf slides
+rm -rf slides/*
 rm -rf slides-source/build
 WD=`pwd`
+
+### build html slideshow ##############################################
 cd slides-source
 bundle exec middleman build
 cd $WD
-mv slides-source/build slides
+mv slides-source/build/* slides/
 mkdir -p slides/reveal.js-3.1.0
 cp -vr slides-source/vendor/assets/reveal.js-3.1.0/plugin slides/reveal.js-3.1.0
+
+### build pdf variant via dectape #####################################
+# see https://github.com/astefanutti/decktape
+cd decktape
+./bin/phantomjs decktape.js automatic ../slides/index.html ../slides/slides.pdf
+cd $WD
