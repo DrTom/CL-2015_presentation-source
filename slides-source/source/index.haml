@@ -10,7 +10,7 @@
     %p Dr. Thomas Schank
     %p Max F. Albrecht
 
-    %h4 (Version 0.5.0-draft)
+    %h4 (Version 0.6.0-draft)
 
     %aside.notes
       :markdown
@@ -82,7 +82,11 @@
 %section#probem
   %section#problem_problem
     :markdown
-      # The Problem
+
+      # 1. The Problem
+
+  %section#problem_madek-2012
+    :markdown
 
       ## Madek Project 2012
 
@@ -107,50 +111,73 @@
 
       automatic → semi automatic testing
 
-  %section#problem_reasoning
+//#############################################################################
+//### Problem #################################################################
+//#############################################################################
+
+%section#enlightenment
+
+  %section#enlightenment_intro
     :markdown
-      # Reasoning
-
-      ## One Test
-
-      $$p_f$$ probability of failure
-
-      $$p_s = 1 - p_f$$ probability of success
-
-      ## $$n$$ Tests
-
-      $$ P_s = p_s^n $$ probability of success for all tests
+      # 2. Enlightenment
 
 
-      # TODO: add example numbers
-
-
-
-  %section#problem_explanation
-    :markdown
-      # Explanation
-
-      $$k$$ retry compensation
-
-      $$ P'_s = (1 - p_f^k)^n $$
-
-    %img{src: 'compensated.svg'}
-
-    %p{style: "font-size: 50%; margin: 0px;"}
-      $$p_f = 0.01;  k= 1 (blue), 2 (red), 3 (yellow) $$
+  %section#enlightenment_probability
 
     :markdown
-      # TODO: add example numbers
+
+      ## Probability of false negative for a test-suite
+
+      | | Expression | Example
+      | probability false negative single test | $$p_f$$ | 3% |
+      | probability positive success |  $$p_s = 1 - p_f$$ | 0.97 |
+      | number of tests |  $$n$$ | 100 |
+      | probability false negative suite|  $$ \mathbf{ P_f  = 1 - p_s^n }  $$ | $$ \approx 95 \%$$
+
+      **→ only one out of 20 will pass as it should**
 
 
-  %section#problem_conclusion
+
+  %section#enlightenment_retrying
+    :markdown
+      # Why retrying works so well
+
+      let $$k$$ number of independent retries per test
+
+      $$ P_s(n) = (1 - p_f)^n $$
+      $$ \Rightarrow $$
+      $$ \mathbf{  P'_s(n,k) = \left(1 - p_f^k\right)^n } $$
+
+      Expected successful outcome for $$n = 100$$ and $$p_f = 0.03$$
+
+      | k | $$P'_s$$
+      | 1 | 5%
+      | 2 | 91%
+      | 3 | 99.7%
+
+
+  %section#enlightenment_false-positive
+    :markdown
+      # Managing false positives
+
+      Retrying randomized tests can hide problems!
+
+      Solution:
+
+      * reproducibility by initializing the pseudo random generator
+      * statistics
+
+  %section#enlightenment_conclusion
     :markdown
 
       # Conclusion
 
-      false negatives happen in complex scenarios
+      * false negatives happen in complex scenarios
+      * the test-suite is very likely to result with a false negatives when there are a lot of tests
+      * we can effectively compensate by retrying single tests with only very low number of maximal retries
 
-      your testing strategy needs to compensate for them
+      **→ retrying is not an anti-pattern but a necessity**
+
 
 
 
