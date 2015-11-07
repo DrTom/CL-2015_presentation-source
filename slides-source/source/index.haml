@@ -7,30 +7,73 @@
 
     %h3 Continuous Lifecycle 2015
 
-    %p Thomas Schank
+    %p Dr. Thomas Schank
     %p Max F. Albrecht
 
-    %h4 (Version 0.3.0-draft)
+    %h4 (Version 0.5.0-draft)
+
+    %aside.notes
+      :markdown
+        * robuste, schnelle, automatisierte tests
+
+  %section#intro_medienarchiv{data: {background: 'medienarchiv.png'}}
 
   %section#intro_about
 
-    %h1 About Us
-
-    %ul
-      %li Thomas: Software-Architect, Developer, CI-Infrastructure
-      %li Max: Frontend Software-Engineer, Meta-Data Concepts
+    %h1 Madek Team & Us
 
 
     %h3
       %a{href: 'https://www.zhdk.ch/'}
         Zurich University of the Arts
 
-    %h2
-      %a{href: 'https://github.com/made://github.com/madek'}
-        Madek
-      %br
-      %a{href: 'http://medienarchiv.zhdk.ch/'}
-        Medienarchiv der Künste
+    .container{style: "width: 1000px; height: 400px; position: relative;"}
+      %img{src: "cw.jpg", style: "width: 15%; position: absolute; top: 0; left: 0;"}
+      %img{src: "sus.jpg", style: "width: 15%; position: absolute; bottom: 20px; left: 0;"}
+      %img{src: "madek-team_2015.jpg", style: "height: 90%; position: absolute; top: 0; left: 230px;"}
+      %img{src: "matus.jpg", style: "width: 15%; position: absolute; top: 0; right: 0;"}
+      %img{src: "toni.jpg", style: "width: 15%; position: absolute; bottom: 20px; right: 0;"}
+
+
+    %ul
+      %li Thomas: Software-Architect, Developer, CI-Infrastructure
+      %li Max: Frontend Software-Engineer, Meta-Data Concepts
+
+
+    %aside.notes
+      :markdown
+        * kleines Team
+        * begrenzte Ressourcen
+
+
+  %section#intro_madek-tec
+
+    :markdown
+      ## [Madek](https://github.com/madek) - [Medienarchiv der Künste](http://medienarchiv.zhdk.ch/)
+
+      ## Architecture & Technologies
+
+      * Ruby on Rails, Clojure
+      * progressive enhancement, React
+      * 3-tier web-application
+      * towards micro-services
+
+  %section#intro_madek-architecture
+
+    %img{src: 'madek-architecture.svg', style: "width: 100%"}
+
+  %section#intro_madek-testing
+    :markdown
+
+
+      ## Madek Testing
+
+      * specification by example
+
+      → integration testing
+      → components interaction
+
+
 
 //#############################################################################
 //### Problem #################################################################
