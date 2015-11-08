@@ -170,7 +170,7 @@
   %section#comprehension_conclusion
     :markdown
 
-      # Conclusion
+      # 2. Comprehension - Conclusion
 
       * false negatives happen in complex scenarios
       * the test-suite is very likely to result with a false negatives when there are a lot of tests
@@ -196,7 +196,7 @@
 
     .row
       .col{style: "float: left; width: 40%;"}
-        %img{src: 'jenkins-aggregator.png', style: "wax-width: 100%; border: 4px solid gray;"}
+        %img{src: 'jenkins-aggregator.png', style: "max-width: 100%; border: 4px solid gray;"}
       .col{style: "float: left; width: 60%"}
         :markdown
           ## Jenkins
@@ -213,7 +213,7 @@
 
     .row
       .col{style: "float: left; width: 40%;"}
-        %img{src: 'screwdriver.jpg', style: "wax-width: 100%; "}
+        %img{src: 'screwdriver.jpg', style: "max-width: 100%; "}
       .col{style: "float: left; width: 60%"}
         :markdown
 
@@ -236,62 +236,97 @@
       * tight **integration** with **source code**
       * **manage services**
       * support **testing**, over **building** to **deployment**
+      * expert tool for professionals
 
       [Cider-CI](http://cider-ci.info) ready to use in fall 2013, **never looked back**
 
 
 
 //#############################################################################
-//### Concepts and Examples in Context ########################################
+//### Concepts in Context #####################################################
 //#############################################################################
 
 %section#concepts
 
-  %section#concepts
-    %h1 Concepts and Examples in Context
+  %section#concepts-intro
+    %h1 4. Concepts in Context
 
-    (top down)
 
-  //#############################################################################
+  //### Jobs ####################################################################
 
   %section#concepts_jobs
-    :markdown
-      # Jobs
 
-        * build
-        * perform static code checks
-        * run tests
-        * deploy
+    %h1 Jobs
+
+    .row
+      .col{style: "float: left; width: 60%"}
+        :markdown
 
 
-    .image
-      %a{href: 'job-dependencies.svg'}
-        %img{src: 'job-dependencies.svg', style: "height: 300px; width: 300px;"}
+          ### Examples
 
-    %p jobs can depend on each other
+          * run test-suite
+          * perform static code checks
+          * build
+          * deploy
+
+          jobs can be **triggered** and can **depend on each other**
+
+      .col{style: "float: left; width: 40%;"}
+        %img{src: 'job-dependencies.svg', style: "max-width: 100%; "}
 
 
     %aside.notes
       :markdown
-        * _Continuous Integration Server_  vs. stupid script runner
+        * _Continuous Integration Server_  vs. script runner
 
 
 
-  %section#practices_source
+  %section#concepts_project-configuration
     :markdown
-      # Practice: The Source is the Truth
+      # Project Configuration
+
+       `cider-ci.yml` file in the project
+
+      ~~~
+      jobs:
+        deploy_test:
+          name: Deploy to test
+
+          depends-on:
+          - type: job
+            job: integration-tests
+            states: [passed]
+
+          run-on:
+          - type: branch
+            include-match: ^master$
+
+          # specify tasks etc
+      ~~~
 
 
-  %section#concepts_scm
+      **The source is the truth.**
+
+
+  %section#concepts_jobs-and-scm
     :markdown
-      # CI and Source Code Management Systems
+      # Cider-CI and the Source Code
 
-      job is bound to _tree-id_ (hash of the state of your project)
+      Cider-CI "knows" about commits, branches, submodules,...
 
-      _tree-id_ is bound to commits
+    %img{src: 'ci-entities_jobs.svg', style: "width: 100%; "}
 
-      * reproducibility
-      * binary search for code-breaks
+    :markdown
+
+      `tree-id`: fingerprint of your source code
+
+      * **reproducibility**
+      * jobs can be run at any time
+      * binary search for "bad" commits
+      * commit amends, squashing: **existing job remains valid**
+
+      we support Git and Git only
 
 
 
@@ -323,28 +358,6 @@
       ## parallelization and resilience
 
 
-  %section#practices_shadowing-failures
-    :markdown
-      # Practice: Reproducible Randomization
-
-      Automatic retries could shadow real problems.
-
-      * Use statistics.
-
-      * Best practice: seed pseudo random generator.
-
-
-  %section#practices_dont-optimize-test
-    :markdown
-      # Practice: Don't "Optimize" Tests
-      (for speed anyways)
-
-    %aside.notes
-      :markdown
-        * last level:
-            * production mode
-            * reverse proxy as in production
-        * counter example: Rails transaction in SQL db for clean, because it is faster
 
 
   //#############################################################################
@@ -355,12 +368,10 @@
 
       actual unit of execution
 
-      traditional CI: one "build" ⇔ one script
+      1. traditional CI: one "build" ⇔ one script
+      2. more modern (Cider-CI v2): one main script + before and after hooks
+      3. Cider-CI v3+: scripts with dependencies
 
-      more modern: one main script + before and after hooks
-
-      * easy vs simple
-      * doesn't cut it for integration testing
 
   %section#concepts_scripts-cider
     :markdown
@@ -389,7 +400,7 @@
 
       parallelization: independent tasks
 
-      integration testing & servcies: scripts with dependencies
+      integration testing & services: scripts with dependencies
 
 
 
