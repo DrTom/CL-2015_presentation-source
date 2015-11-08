@@ -10,7 +10,7 @@
     %p Dr. Thomas Schank
     %p Max F. Albrecht
 
-    %h4 (Version 0.6.0-draft)
+    %h4 (Version 0.7.0-draft)
 
     %aside.notes
       :markdown
@@ -112,17 +112,17 @@
       automatic → semi automatic testing
 
 //#############################################################################
-//### Problem #################################################################
+//### Comprehension ###########################################################
 //#############################################################################
 
-%section#enlightenment
+%section#comprehension
 
-  %section#enlightenment_intro
+  %section#comprehension_intro
     :markdown
-      # 2. Enlightenment
+      # 2. Comprehension
 
 
-  %section#enlightenment_probability
+  %section#comprehension_probability
 
     :markdown
 
@@ -138,7 +138,7 @@
 
 
 
-  %section#enlightenment_retrying
+  %section#comprehension_retrying
     :markdown
       # Why retrying works so well
 
@@ -156,7 +156,7 @@
       | 3 | 99.7%
 
 
-  %section#enlightenment_false-positive
+  %section#comprehension_false-positive
     :markdown
       # Managing false positives
 
@@ -167,7 +167,7 @@
       * reproducibility by initializing the pseudo random generator
       * statistics
 
-  %section#enlightenment_conclusion
+  %section#comprehension_conclusion
     :markdown
 
       # Conclusion
@@ -190,33 +190,40 @@
 %section#implementation
   %section#implementation-intro
 
-    %h1 Implementation
+    %h1 3. Implementation
 
   %section#implementation_jenkins
-    :markdown
-      # Jenkins
 
-      * fall 2012
-      * build creates other builds via the Jenkins API
-      * last build aggregates
+    .row
+      .col{style: "float: left; width: 40%;"}
+        %img{src: 'jenkins-aggregator.png', style: "wax-width: 100%; border: 4px solid gray;"}
+      .col{style: "float: left; width: 60%"}
+        :markdown
+          ## Jenkins
 
-      → it worked
+          * fall 2012
+          * build creates other builds via the Jenkins API
+          * last build aggregates
+          * solved false negative problem (partly)
+          * testing time: 15 - 25 minutes
 
-      * solves false negative problem (largely)
-      * testing time: 15 - 25 minutes
-
-      # TODO: add screenshot
+          → it worked
 
   %section#implementation_jenkins-problems
-    :markdown
-      # Iusses
 
-      * "REST-like style API" → not much like REST
-      * hunt for documentation
+    .row
+      .col{style: "float: left; width: 40%;"}
+        %img{src: 'screwdriver.jpg', style: "wax-width: 100%; "}
+      .col{style: "float: left; width: 60%"}
+        :markdown
 
-      * too frequent SCM pushes interfere
+          * frequent code pushes interfere
 
-      → Jenkins just isn't made for this
+          * "REST-like style API" → not much like REST
+
+          * considerable effort and maintenance
+
+          **→  Jenkins and "CI-X" just aren't made for this**
 
   %section#implementation_homegrown-solution
     :markdown
@@ -224,23 +231,14 @@
 
       private project started in spring  2013
 
-      * inherent support for retries and parallelization
-      * expert system
-      * simple as possible
-      * Git and git only, all the way down
+      * inherent support for **retries** and **parallelization**
+      * test **reproducibility**
+      * tight **integration** with **source code**
+      * **manage services**
+      * support **testing**, over **building** to **deployment**
 
-      ready to use in fall 2013, never looked back
+      [Cider-CI](http://cider-ci.info) ready to use in fall 2013, **never looked back**
 
-
-  %section#implementation_cider-ci
-    :markdown
-      # [Cider-CI](http://cider-ci.info) Today
-
-      * false negatives solved
-      * testing time Madek v2:  2 Hours → 3 ‥ 5 Minutes
-      * support complex scenarios:
-        * testing microservice architectures
-        * perform deployment
 
 
 //#############################################################################
@@ -439,6 +437,16 @@
         %source{'data-src': 'jobs.mp4', type: 'video/mp4',
           style: "width: 100%; height: 100%;"}
 
+
+  %section#implementation_cider-ci
+    :markdown
+      # [Cider-CI](http://cider-ci.info) Today
+
+      * false negatives solved
+      * parallelization (Madek v2:  2 Hours → 3 ‥ 5 Minutes)
+      * support complex scenarios:
+        * testing microservice architectures
+        * perform deployment
 
 
 //#############################################################################
