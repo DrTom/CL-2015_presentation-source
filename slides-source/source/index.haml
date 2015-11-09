@@ -33,7 +33,7 @@
         %img{src: 'presentation-url.svg', style: 'width: 3em;'}
 
 
-    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.8.0-draft
+    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.9.0-draft
 
     %aside.notes
       :markdown
@@ -362,19 +362,20 @@
   //#############################################################################
 
   %section#concepts_tasks-trials_1
-    %h1 Tasks & Trials 1
+    %h1 Jobs & Tasks
 
     .image
-      %a{href: 'job-tasks-script.svg'}
-        %img{src: 'job-tasks-script.svg', style: "width: 500px;"}
+      %a{href: 'job-tasks.svg'}
+        %img{src: 'job-tasks.svg', style: "width: 500px;"}
 
     :markdown
 
-      jobs: container and state aggregate of tasks
+      job: container and state aggregate for tasks
 
+      **→ parallelization**
 
-  %section#concepts_tasks-trials_2
-    %h1 Tasks & Trials 2
+  %section#concepts_tasks-trials
+    %h1 Tasks & Trials
 
     .image
       %a{href: 'trial-retry.svg'}
@@ -382,9 +383,14 @@
 
     :markdown
 
-      task: blueprint, container and state aggregate of trials
+      task: **blueprint**, container and state aggregate for trials
 
-      ## parallelization and resilience
+      **→ resilience**
+
+    %aside.notes
+      :markdown
+        * Robustheit => Parallelisierung, aber nicht umgekehrt
+
 
 
 
@@ -421,15 +427,15 @@
 
   %section#concepts_conclusion
     :markdown
-      # Conclusion
+      ##  Concepts in Context - Wrap-up
+
+      resilient testing: **tasks** and **trials**
+
+      parallelization: **independent** tasks
+
+      managing interaction: **scripts with dependencies**
 
       real continuous integration: job dependencies
-
-      resilient integration testing: tasks, trials and retries
-
-      parallelization: independent tasks
-
-      integration testing & services: scripts with dependencies
 
 
 
@@ -465,6 +471,9 @@
         %img{src: 'scripts-gantt-chart.png', style: "width: 800px;"}
 
 
+  //#############################################################################
+
+
   %section#demos_madek-jobs
     %h1  Jobs and Dependencies for the Madek Project
     .image
@@ -472,21 +481,12 @@
         %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
 
   %section#demos_madek-jobs-video
-    %a{href: 'jobs.mp4'}
-      %video
-        %source{'data-src': 'jobs.mp4', type: 'video/mp4',
-          style: "width: 100%; height: 100%;"}
+    %a{href: 'jobs-demo.mp4'}
+      %img{src: 'jobs-demo.png'}
+      //%video
+      //  %source{'data-src': , type: 'video/mp4',
+      //    style: "width: 100%; height: 100%;"}
 
-
-  %section#implementation_cider-ci
-    :markdown
-      # [Cider-CI](http://cider-ci.info) Today
-
-      * false negatives solved
-      * parallelization (Madek v2:  2 Hours → 3 ‥ 5 Minutes)
-      * support complex scenarios:
-        * testing microservice architectures
-        * perform deployment
 
 
 //#############################################################################
