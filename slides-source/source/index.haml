@@ -33,7 +33,7 @@
         %img{src: 'presentation-url.svg', style: 'width: 3em;'}
 
 
-    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.9.0-draft
+    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.10.0
 
     %aside.notes
       :markdown
@@ -83,9 +83,10 @@
       ## Architecture & Technologies
 
       * Ruby on Rails, Clojure
-      * progressive enhancement, React
+      * React with progressive enhancement
       * 3-tier web-application
       * towards micro-services
+      * deployment via Ansible to private cloud
 
   %section#intro_madek-architecture
 
@@ -139,6 +140,13 @@
       automated tests, local retries
 
       automatic → semi automatic testing
+
+    %aside.notes
+      :markdown
+        * bekanntes problem?
+        * retry Test-Frameworks, hat nicht geholfen
+
+
 
 //#############################################################################
 //### Comprehension ###########################################################
@@ -201,11 +209,13 @@
 
       # 2. Comprehension - Conclusion
 
-      * false negatives happen in complex scenarios
-      * the test-suite is very likely to result with a false negatives when there are a lot of tests
-      * we can effectively compensate by retrying single tests with only very low number of maximal retries
+      * more tests → **exponential** increase of likeliness for false negative
 
-      **→ retrying is not an anti-pattern but a necessity**
+      * compensate by retrying single tests just a few times
+
+      **→ retrying is not an anti-pattern**
+
+      **→ it can be a necessity**
 
 
 
@@ -379,11 +389,12 @@
 
     .image
       %a{href: 'trial-retry.svg'}
-        %img{src: 'trial-retry.svg', style: "width: 500px;"}
+        %img{src: 'trial-retry.svg', style: "width: 700px;"}
 
     :markdown
 
-      task: **blueprint**, container and state aggregate for trials
+      * **blueprint**
+      * container and state aggregate for trials
 
       **→ resilience**
 
@@ -392,37 +403,37 @@
         * Robustheit => Parallelisierung, aber nicht umgekehrt
 
 
+  %section#concepts_trials-scripts
+    .row
+      .col{style: "float: left; width: 35%;"}
+        %img{src: 'scripts.svg', style: "max-width: 100%;"}
+      .col{style: "float: left; width: 65%; text-align: left;"}
+        :markdown
+          # Trial & Scripts
+          * actual unit of execution
+          * executed in the **same context**
+          * **depend** on each other
+
+
+  %section#concepts_scripts
+
+    :markdown
+      ## Script Dependencies
+
+    .image
+      %img{src: 'script-dependencies-simple.png', style: "width: 70%;"}
+
+    :markdown
+
+      * traditional CI: one "build" ⇔ one script
+      * more modern: one main script + before and after "hooks"
+      * Cider-CI: **scripts with dependencies**
+
+
 
 
 
   //#############################################################################
-
-  %section#concepts_scripts-intro
-    :markdown
-      # Scripts
-
-      actual unit of execution
-
-      1. traditional CI: one "build" ⇔ one script
-      2. more modern (Cider-CI v2): one main script + before and after hooks
-      3. Cider-CI v3+: scripts with dependencies
-
-
-  %section#concepts_scripts-cider
-    :markdown
-      # Scripts with Dependencies
-    .image
-      %a{href: 'scripts-dependencies.png'}
-        %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
-
-
-  %section#concepts_scripts-fail
-    :markdown
-      # Scripts - Fail and Clean-up
-
-    .image
-      %a{href: 'scripts-dependencies-fail.png'}
-        %img{src: 'scripts-dependencies-fail.png', style: "width: 800px;"}
 
 
   %section#concepts_conclusion
@@ -447,35 +458,26 @@
 
   %section#demos_demos
 
-    %h1 Demos
+    %h1 4. Demos
 
-  %section#demos_scripts_int-tests
-    :markdown
-      # Scripts with Dependencies
+
+  %section#demos_madek-jobs
+    %a{href: 'retry_and_scripts.mp4'}
+      %img{src: 'retry_and_scripts.png'}
+
+    %h1 Retry Task and Scripts Dependency Demo
     .image
-      %a{href: 'scripts-dependencies.png'}
-        %img{src: 'scripts-dependencies.png', style: "width: 800px;"}
+      %a{href: 'madek_job-dependencies.svg'}
+        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
 
-  %section#demos_scripts_in-action
 
-    %a{href: 'scripts.mp4'}
-      %video
-        %source{'data-src': 'scripts.mp4', type: 'video/mp4',
-          style: "width: 100%; height: 100%;"}
-
-  %section#scripts_gantt-chart
-    :markdown
-      # Scripts Gantt-Chart
-    .image
-      %a{href: 'scripts-gantt-chart.png'}
-        %img{src: 'scripts-gantt-chart.png', style: "width: 800px;"}
 
 
   //#############################################################################
 
 
   %section#demos_madek-jobs
-    %h1  Jobs and Dependencies for the Madek Project
+    %h1 Jobs and Dependencies for the Madek Project
     .image
       %a{href: 'madek_job-dependencies.svg'}
         %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
@@ -500,15 +502,21 @@
 
       # Conclusion
 
-      Consider to build your own test runner.
+      * A false negative outcome becomes likely with an increasing number of tests.
+      * The problem must be solved by retrying single tests.
+      * Consider to build your own test runner.
+      * Try Cider-CI, open source, installs with two commands:
 
-      or
+    %a{href: 'http://docs.cider-ci.info/introduction/quick-start/'}
+      %br
+        %code{style: "font-size: 75%"} http://docs.cider-ci.info/introduction/quick-start/
+      %img{src: 'cider-ci_intro_qr.svg', style: 'width: 3em;'}
 
-      try Cider-CI, open source, installs with one command:
 
-      [Cider-CI Quick Start Guide](http://docs.cider-ci.info/introduction/quick-start/)
+    %blockquote{style: "margin-top: 1em; font-size: 125%"}
+      %b
+        Thank You!
 
-      `http://docs.cider-ci.info/introduction/quick-start/`
 
 
 
