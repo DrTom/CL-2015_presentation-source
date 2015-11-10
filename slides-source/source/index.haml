@@ -33,7 +33,7 @@
         %img{src: 'presentation-url.svg', style: 'width: 3em;'}
 
 
-    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.12.0
+    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.13.0
 
     %aside.notes
       :markdown
@@ -98,7 +98,8 @@
 
       ## Madek Testing
 
-      **specification by example**
+      ["**specification by example**"](http://specificationbyexample.com/)
+
 
       → integration testing
 
@@ -178,16 +179,18 @@
 
     :markdown
 
-      ## Probability of false negative for a test-suite
+      ## Probability of a False Negative for a whole Test-Suite
 
       | | Expression | Example
       | probability false negative single test | $$p_f$$ | 3% |
-      | probability positive success |  $$p_s = 1 - p_f$$ | 0.97 |
+      | probability "success" |  $$p_s = 1 - p_f$$ | 0.97 |
       | number of tests |  $$n$$ | 100 |
-      | probability false negative suite|  $$ \mathbf{ P_f  = 1 - p_s^n }  $$ | $$ \approx 95 \%$$
+      | probability "success" whole suite|  $$ \mathbf{ P_s  = p_s^n = \left( 1 - p_f \right)^n}  $$ | $$ \approx 5 \%$$
 
       **→ only one out of 20 will pass as it should**
 
+    %p{style: "text-size: 80%"}
+      "succes" = true positive
 
 
   %section#comprehension_retrying
@@ -213,14 +216,17 @@
 
       # 2. Comprehension - Conclusion
 
-      * more tests → **exponential** increase of likeliness for false negative
+      * more tests → **exponential** increase of likeliness for false negatives
 
-      * compensate by retrying single tests just a few times
+      * compensate by **retrying** single tests just a **few times**
 
       **→ retrying is not an anti-pattern**
 
       **→ it can be a necessity**
 
+    %aside.notes
+      :markdown
+        * Integration Tests !!!
 
 
 
@@ -274,9 +280,9 @@
 
   %section#implementation_homegrown-solution
     :markdown
-      # Homegrown Solution
+      # [Cider-CI](http://cider-ci.info)
 
-      private project started in spring  2013
+      homegrown solution, started in spring 2013
 
       * inherent support for **retries** and **parallelization**
       * test **reproducibility**
@@ -284,8 +290,12 @@
       * **manage services** while testing
       * support everything from **testing** to **deployment**
 
-      [Cider-CI](http://cider-ci.info) ready to use in fall 2013, **never looked back**
+       ready to use in fall 2013, **never looked back**
 
+    %aside.notes
+      :markdown
+        * eigenes System, Open Source, Stolz,
+        * Konzepte
 
 
 //#############################################################################
@@ -461,16 +471,6 @@
       %i.fa.fa-file-video-o
 
 
-
-  %section#demos_madek-scripts
-    %a{href: 'retry_and_scripts.mp4'}
-      %img{src: 'retry_and_scripts.png'}
-
-
-
-  //#############################################################################
-
-
   %section#demos_madek-jobs
     .image
       %a{href: 'madek_job-dependencies.svg'}
@@ -483,6 +483,12 @@
       //%video
       //  %source{'data-src': , type: 'video/mp4',
       //    style: "width: 100%; height: 100%;"}
+
+
+  %section#demos_madek-scripts
+    %a{href: 'retry_and_scripts.mp4'}
+      %img{src: 'retry_and_scripts.png'}
+
 
 
 //#############################################################################
@@ -507,11 +513,12 @@
 
       Retrying randomized tests can hide problems!
 
-      Generative Testing e.g.
+      "Generative Testing" e.g.
 
       ##Solution:
 
-      * reproducibility by initializing the pseudo random generator
+      * reproducibility by initializing the
+          pseudo random generator (we use the `tree_id` e.g.)
       * statistics
 
   %section#addendum_git
@@ -523,17 +530,32 @@
       :markdown
         * no go for comercial systems
 
-
   %section#addendum_project-security
     :markdown
-      # Security
+      # Security & Trust
 
-      * Cider-CI server **never runs any code** from projects
-      * **"blessed" executors**, only accept trials from a particular project (repository)
+      * Cider-CI server itself **never runs any code** from projects
+      * **"blessed" executors** only accept trials for a particular project (repository)
 
     %aside.notes
       :markdown
         siehe Vortrag Dr. Andreas Krüger
+
+  %section#addendum_matching
+    :markdown
+      # Matching Trials to Executors
+
+      * task specifies **required traits**, e.g: [`bash`, `ruby-2.2` ]
+
+      * executors advertise **available traites**, e.g. [`bash`, `maven`, `postgresql`, `ruby-2.1`, `ruby-2.2`,  ...]
+
+      Cider-CI will determine a suitable executor.
+
+
+    %aside.notes
+      :markdown
+        siehe Vortrag Dr. Andreas Krüger
+
 
   %section#addendum_deployment
     :markdown
@@ -545,6 +567,24 @@
     %aside.notes
       :markdown
         siehe Vortrag Dr. Andreas Krüger
+
+  %section#addendum_expert
+    :markdown
+      # Cider-CI is an Expert System
+
+      it is about **making the hard possible**, and not
+      not about making the simple easy*
+
+      * for professionals
+      * no compromises
+      * steep learning curve
+      * high rewards
+
+      → swiss army knife for devops
+
+    %p{style: "font-size: 70%; margin-top: 2em"}
+      *see "Simple Made Easy" by Rich Hickey
+
 
 
 
