@@ -33,7 +33,7 @@
         %img{src: 'presentation-url.svg', style: 'width: 3em;'}
 
 
-    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.11.0
+    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.12.0
 
     %aside.notes
       :markdown
@@ -59,7 +59,7 @@
       %img{src: "toni.jpg", style: "width: 15%; position: absolute; bottom: 20px; right: 0;"}
 
 
-    %ul
+    %ul{style: "font-size: 80%;"}
       %li Thomas: Software-Architect, Developer, CI-Infrastructure
       %li Max: Frontend Software-Engineer, Meta-Data Concepts
 
@@ -98,9 +98,10 @@
 
       ## Madek Testing
 
-      * specification by example
+      **specification by example**
 
       → integration testing
+
       → components interaction
 
 
@@ -124,7 +125,7 @@
       many new features, many new tests
 
       * testing time 1 1/2 - 2 hours, increasing
-      * more and more failing tests (false negatives)
+      * more and more failing tests: **false negatives**
       * 1/8 builds pass
 
   %section#problem_improve-tests
@@ -358,6 +359,12 @@
 
       **The source is the truth.**
 
+      configuration: reproducible, reviews, audits ???
+
+    %aside.notes
+      :markdown
+        siehe Vortrag Dr. Andreas Krüger
+
 
   %section#concepts_jobs-and-scm
     :markdown
@@ -372,8 +379,8 @@
       `tree-id`: fingerprint of your source code
 
       * **reproducibility**
-      * jobs can be run at any time
-      * binary search for "bad" commits
+      * jobs can be **run at any time** (later)
+      * **binary search** for "bad" commits
       * commit amends, squashing: **existing job remains valid**
 
 
@@ -517,13 +524,28 @@
         * no go for comercial systems
 
 
-  %section#addendum_expert
+  %section#addendum_project-security
     :markdown
-      # Cider-CI is an Expert System
-      * for professionals
-      * no compromises
-      * steep learning curve
-      * rewards
+      # Security
+
+      * Cider-CI server **never runs any code** from projects
+      * **"blessed" executors**, only accept trials from a particular project (repository)
+
+    %aside.notes
+      :markdown
+        siehe Vortrag Dr. Andreas Krüger
+
+  %section#addendum_deployment
+    :markdown
+      # Deployment
+
+      * Ansible
+      * Cider-CI deploy project, SCM managed, reproducible
+
+    %aside.notes
+      :markdown
+        siehe Vortrag Dr. Andreas Krüger
+
 
 
 //#############################################################################
