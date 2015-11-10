@@ -33,7 +33,7 @@
         %img{src: 'presentation-url.svg', style: 'width: 3em;'}
 
 
-    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.10.0
+    %p{style: 'margin-top: 1em; font-size: 50%'} Version 0.11.0
 
     %aside.notes
       :markdown
@@ -111,9 +111,10 @@
 
 %section#probem
   %section#problem_problem
-    :markdown
+    %h1 1. The Problem
 
-      # 1. The Problem
+    %p{style: "font-size: 7em"}
+      %i.fa.fa-question-circle
 
   %section#problem_madek-2012
     :markdown
@@ -127,11 +128,15 @@
       * 1/8 builds pass
 
   %section#problem_improve-tests
-    :markdown
-      # Try to Improve Tests
-
-      * very time and resources consuming
-      * new features and new tests made efforts futile
+    .row
+      .col{style: "float: left; width: 40%"}
+        %img{src: 'scream.jpg', style: "max-width: 100%;"}
+      .col{style: "float: left; width: 60%;"}
+        :markdown
+          ## Try to Improve Tests
+          * very time and resources consuming
+          * improvement for some time
+          * new features and new tests made efforts futile
 
   %section#problem_manual-retries
     :markdown
@@ -155,8 +160,17 @@
 %section#comprehension
 
   %section#comprehension_intro
-    :markdown
-      # 2. Comprehension
+    %h1 2. Comprehension
+
+    %img{src: 'GirolamoCardano.jpg', style: "max-width: 100%; border: 0px solid gray;"}
+
+    %aside.notes
+      :markdown
+        * Girolamo Cardano
+        * Mathematiker und Glücksspieler!
+
+
+
 
 
   %section#comprehension_probability
@@ -193,17 +207,6 @@
       | 3 | 99.7%
 
 
-  %section#comprehension_false-positive
-    :markdown
-      # Managing false positives
-
-      Retrying randomized tests can hide problems!
-
-      Solution:
-
-      * reproducibility by initializing the pseudo random generator
-      * statistics
-
   %section#comprehension_conclusion
     :markdown
 
@@ -231,11 +234,15 @@
 
     %h1 3. Implementation
 
+    %p{style: "font-size: 7em"}
+      %i.fa.fa-cogs
+
+
   %section#implementation_jenkins
 
     .row
       .col{style: "float: left; width: 40%;"}
-        %img{src: 'jenkins-aggregator.png', style: "max-width: 100%; border: 4px solid gray;"}
+        %img{src: 'jenkins-aggregator.png', style: "max-width: 100%; border: 0px solid gray;"}
       .col{style: "float: left; width: 60%"}
         :markdown
           ## Jenkins
@@ -273,9 +280,8 @@
       * inherent support for **retries** and **parallelization**
       * test **reproducibility**
       * tight **integration** with **source code**
-      * **manage services**
-      * support **testing**, over **building** to **deployment**
-      * expert tool for professionals
+      * **manage services** while testing
+      * support everything from **testing** to **deployment**
 
       [Cider-CI](http://cider-ci.info) ready to use in fall 2013, **never looked back**
 
@@ -289,6 +295,11 @@
 
   %section#concepts-intro
     %h1 4. Concepts in Context
+
+    %p{style: "font-size: 7em"}
+      %i.fa.fa-lightbulb-o
+
+
 
 
   //### Jobs ####################################################################
@@ -365,8 +376,6 @@
       * binary search for "bad" commits
       * commit amends, squashing: **existing job remains valid**
 
-      we support Git and Git only
-
 
 
   //#############################################################################
@@ -431,25 +440,6 @@
 
 
 
-
-
-  //#############################################################################
-
-
-  %section#concepts_conclusion
-    :markdown
-      ##  Concepts in Context - Wrap-up
-
-      resilient testing: **tasks** and **trials**
-
-      parallelization: **independent** tasks
-
-      managing interaction: **scripts with dependencies**
-
-      real continuous integration: job dependencies
-
-
-
 //#############################################################################
 //### demos ###################################################################
 //#############################################################################
@@ -460,16 +450,14 @@
 
     %h1 4. Demos
 
+    %p{style: "font-size: 7em"}
+      %i.fa.fa-file-video-o
 
-  %section#demos_madek-jobs
+
+
+  %section#demos_madek-scripts
     %a{href: 'retry_and_scripts.mp4'}
       %img{src: 'retry_and_scripts.png'}
-
-    %h1 Retry Task and Scripts Dependency Demo
-    .image
-      %a{href: 'madek_job-dependencies.svg'}
-        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
-
 
 
 
@@ -477,10 +465,10 @@
 
 
   %section#demos_madek-jobs
-    %h1 Jobs and Dependencies for the Madek Project
     .image
       %a{href: 'madek_job-dependencies.svg'}
-        %img{src: 'madek_job-dependencies.svg', style: "height: 500px; width: 500px;"}
+        %img{src: 'madek_job-dependencies.svg',
+          style: "max-height: 700px;"}
 
   %section#demos_madek-jobs-video
     %a{href: 'jobs-demo.mp4'}
@@ -489,6 +477,53 @@
       //  %source{'data-src': , type: 'video/mp4',
       //    style: "width: 100%; height: 100%;"}
 
+
+//#############################################################################
+//### Tangential ##############################################################
+//#############################################################################
+
+%section#addendum
+
+  %section#addendum_intro
+
+    %h1 5. Addendum
+
+    %p{style: "font-size: 7em"}
+      %i.fa.fa-ellipsis-h
+
+
+
+  %section#addendum_false-positive
+    :markdown
+      # Managing false positives
+
+
+      Retrying randomized tests can hide problems!
+
+      Generative Testing e.g.
+
+      ##Solution:
+
+      * reproducibility by initializing the pseudo random generator
+      * statistics
+
+  %section#addendum_git
+    :markdown
+      # Git SCM and Git only
+      * don't compromise
+      * can't support everything with reasonable effort
+    %aside.notes
+      :markdown
+        * no go for comercial systems
+
+
+  %section#addendum_expert
+    :markdown
+      # Cider-CI is an Expert System
+      * for professionals
+      * no compromises
+      * steep learning curve
+      * rewards
 
 
 //#############################################################################
@@ -504,7 +539,7 @@
 
       * A false negative outcome becomes likely with an increasing number of tests.
       * The problem must be solved by retrying single tests.
-      * Consider to build your own test runner.
+      * Consider to build your own pipeline.
       * Try Cider-CI, open source, installs with two commands:
 
     %a{href: 'http://docs.cider-ci.info/introduction/quick-start/'}
